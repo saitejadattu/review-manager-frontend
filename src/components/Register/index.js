@@ -75,7 +75,7 @@ const Register = () => {
                     },
                     body: JSON.stringify(formData)
                 }
-                const dataFecth = await fetch('http://localhost:5000/user/register', payload)
+                const dataFecth = await fetch('https://review-manager-backend.onrender.com/user/register', payload)
                 if (dataFecth.status === 200) {
                     await dataFecth.json()
                     setFormData({ email: '', password: '', name: '' })
