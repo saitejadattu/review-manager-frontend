@@ -31,7 +31,7 @@ const Login = () => {
                     },
                     body: JSON.stringify(loginDetails)
                 }
-                const dataFecth = await fetch('http://localhost:5000/user/login', payload)
+                const dataFecth = await fetch('https://review-manager-backend.onrender.com/user/login', payload)
                 if (dataFecth.status === 200) {
                     const response = await dataFecth.json()
                     Cookie.set('jwtToken', response.token, { expires: 1 })
