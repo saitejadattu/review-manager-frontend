@@ -22,7 +22,7 @@ const ReviewSection = ({ productId }) => {
             body: JSON.stringify({ productId })
         }
         const dataFecth = async () => {
-            const response = await fetch("http://localhost:5000/review/all", payload)
+            const response = await fetch("https://review-manager-backend.onrender.com/review/all", payload)
             const data = await response.json()
             setReviewList(data.reviewList)
         }
@@ -55,7 +55,7 @@ const ReviewSection = ({ productId }) => {
         };
 
         try {
-            const response = await fetch("http://localhost:5000/review/update", payload);
+            const response = await fetch("https://review-manager-backend.onrender.com/review/update", payload);
             const data = await response.json();
             setValue(data)
             setEditPopup(false);
@@ -78,7 +78,7 @@ const ReviewSection = ({ productId }) => {
                 },
                 body: JSON.stringify({ reviewId })
             }
-            const deletData = await fetch('http://localhost:5000/review/delete', payload)
+            const deletData = await fetch('https://review-manager-backend.onrender.com/review/delete', payload)
             const response = await deletData.json()
             setValue(response)
         } catch (e) {
@@ -102,7 +102,7 @@ const ReviewSection = ({ productId }) => {
                 },
                 body: JSON.stringify({ ...reviewData, userId: user.email, productId })
             }
-            const sendData = await fetch('http://localhost:5000/review/add', payload)
+            const sendData = await fetch('https://review-manager-backend.onrender.com/review/add', payload)
             const response = await sendData.json()
             setReviewData({ commentText: '', rating: '' })
             setValue(response)
