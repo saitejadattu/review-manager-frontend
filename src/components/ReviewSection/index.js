@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Cookie from 'js-cookie'
 import { jwtDecode } from 'jwt-decode'
-
 const ReviewSection = ({ productId }) => {
     const [reviewList, setReviewList] = useState([]);
     const [reviewData, setReviewData] = useState({ commentText: '', rating: '' })
@@ -11,6 +10,7 @@ const ReviewSection = ({ productId }) => {
     const [value, setValue] = useState({})
     const token = Cookie.get('jwtToken')
     const user = jwtDecode(token)
+    const url = ""
 
     useEffect(() => {
         const payload = {
@@ -22,7 +22,7 @@ const ReviewSection = ({ productId }) => {
             body: JSON.stringify({ productId })
         }
         const dataFecth = async () => {
-            const response = await fetch("https://review-manager-backend.onrender.com/review/all", payload)
+            const response = await fetch(`${url}/review/product-review`, payload)
             const data = await response.json()
             setReviewList(data.reviewList)
         }
@@ -55,7 +55,7 @@ const ReviewSection = ({ productId }) => {
         };
 
         try {
-            const response = await fetch("https://review-manager-backend.onrender.com/review/update", payload);
+            const response = await fetch(`${url}/review/update`, payload);
             const data = await response.json();
             setValue(data)
             setEditPopup(false);
@@ -78,7 +78,7 @@ const ReviewSection = ({ productId }) => {
                 },
                 body: JSON.stringify({ reviewId })
             }
-            const deletData = await fetch('https://review-manager-backend.onrender.com/review/delete', payload)
+            const deletData = await fetch(`${url}/review/delete`, payload)
             const response = await deletData.json()
             setValue(response)
         } catch (e) {
@@ -102,7 +102,7 @@ const ReviewSection = ({ productId }) => {
                 },
                 body: JSON.stringify({ ...reviewData, userId: user.email, productId })
             }
-            const sendData = await fetch('https://review-manager-backend.onrender.com/review/add', payload)
+            const sendData = await fetch(`${url}/review/add`, payload)
             const response = await sendData.json()
             setReviewData({ commentText: '', rating: '' })
             setValue(response)
