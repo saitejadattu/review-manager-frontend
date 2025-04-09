@@ -10,7 +10,7 @@ const ReviewSection = ({ productId }) => {
     const [value, setValue] = useState({})
     const token = Cookie.get('jwtToken')
     const user = jwtDecode(token)
-    const url = ""
+    const url = "https://review-manager-backend-1.onrender.com"
 
     useEffect(() => {
         const payload = {
